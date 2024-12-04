@@ -22,13 +22,24 @@ Recognizing the increasing prevalence of self parking features in modern vehicle
   <img src="https://github.com/user-attachments/assets/795dda57-bc76-4771-8c7e-e1ee96315c64" />
 </p>
 
+$$\begin{bmatrix} 
+\dot{X}_r \\ 
+\dot{Y}_r \\ 
+\dot{\phi} 
+\end{bmatrix} =
+\begin{bmatrix} 
+cos(\phi) \\ 
+sin(\phi) \\ 
+\frac{tan(\delta)}{L} 
+\end{bmatrix} v_r
+$$
+
 ### 2.2 Localization and Parking Space Detection
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/d7aa5bd5-655d-41e6-b4fe-4a3c81b18dc2" />
 </p>
 
-$$\begin{bmatrix} \dot{X_r} \\ \dot{Y_r} \\ \dot{\varphi}  \end{bmatrix} = \begin{bmatrix} cos(\varphi) & 0 \\ sin(\varphi) & 0 \\ \frac{tan(\delta)}{L} & 0 \end{bmatrix} v_r$$
 
 $$X_k = f(X_{k-1}) + W_{k-1}$$
 
@@ -48,16 +59,44 @@ $$x_k = [x, y, \theta]^T$$
 
 $$u_k = [v, \delta]^T$$
 
-$$h(x_k) = \begin{bmatrix} \theta_k \\ v_k \end{bmatrix}$$
 
-$$x_{k+1} = f(x_k, u_k) = \begin{bmatrix} x_k + v_k cos(\theta_k) \Delta t \\ y_k + v_k sin(\theta_k) \Delta t \\ \theta_k + \frac{v_k}{L} tan(\delta_k) \Delta t \end{bmatrix}$$
 
-$$F_k = \frac{\delta f}{\delta x_k} = \begin{bmatrix} 1 & 0 & -v_k sin(\theta_k) \Delta t \\ 0 & 1 & v_k cos(\theta_k) \Delta t \\ 0 & 0 & 1 \end{bmatrix}$$
+$$h(x_k) = 
+\begin{bmatrix}
+\theta_k \\
+v_k
+\end{bmatrix}$$
 
-$$P_k = \frac{\delta f}{\delta u_k} = \begin{bmatrix} cos(\theta_k) \Delta t & 0 \\ sin(\theta_k) \Delta t & 0 \\ \frac{tan(\delta_k) \Delta t}{L} & \frac{v_k \Delta t}{L cos^2(\delta_k)} \end{bmatrix}$$
 
-$$H = \frac{\delta h}{\delta x_k} = \begin{bmatrix} 0 & 0 & 1 \\ 0 & 0 & 0 \end{bmatrix}$$
+$$x_{k+1} = f(x_k, u_k) =  
+\begin{bmatrix} 
+x_k + v_k cos(\theta_k) \Delta t \\ 
+y_k + v_k sin(\theta_k) \Delta t \\ 
+\theta_k + \frac{v_k}{L} tan(\delta_k) \Delta t
+\end{bmatrix}
+$$
 
+$$F_k = \frac{\delta f}{\delta x_k} = 
+\begin{bmatrix} 
+1 & 0 & -v_k sin(\theta_k) \Delta t \\ 
+0 & 1 & v_k cos(\theta_k) \Delta t \\ 
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+$$P_k = \frac{\delta f}{\delta u_k} = 
+\begin{bmatrix} 
+cos(\theta_k) \Delta t & 0 \\ 
+sin(\theta_k) \Delta t & 0 \\ 
+\frac{tan(\delta_k) \Delta t}{L} & \frac{v_k \Delta t}{L cos^2(\delta_k)}
+\end{bmatrix}
+$$
+
+$$H = \frac{\delta h}{\delta x_k} = 
+\begin{bmatrix} 
+  0 & 0 & 1 \\ 
+  0 & 0 & 0 
+\end{bmatrix}$$
 
 
 ### 2.3 Path planning for parking manoeuvre and path optimization based B-spline
@@ -108,6 +147,36 @@ $$\delta(t) = \delta_{pp} + \delta_p + \delta_i = tan^{-1}\left( \frac{2Lsin(\al
 ## 3. Simulation
 
 ## 4. Experrimental Testing Of Parking Algorithm
+
+| Parameter | Value |
+|---|---|
+| Wheelbase/m | 0.25 |
+| L<sub>f</sub>/m | 0.17 |
+| L<sub>r</sub>/m | 0.13 |
+| Track/m | 0.22 |
+|  δ<sub>max</sub> /rad | 7π/36 | 
+| v<sub>max</sub>/ms<sup>-1</sup> | 0.14 |
+
+**TABLE 4. Actual parking space parameters**
+
+|  | Trajectory size (m) |  | Space size (m) |  |
+|---|---|---|---|---|
+|  |  |x<sub>0</sub> - x<sub>1</sub>|  |y<sub>0</sub> - y<sub>1</sub>| d | Length | Width |
+|---|---|---|---|---|
+| 1 | 0.475 | 1.9 | 0.65 | 0.9 | 0.25 |
+| 2 | 0.425 | 1.7 | 0.6 | 1 | 0.25 |
+| 3 | 0.395 | 1.58 | 0.57 | 1 | 0.25 |
+
+
+
+**TABLE 5.**
+
+| Case  | Front | Behind | Right Side |
+|---|---|---|---|
+| 1 |  19 cm | 32 cm | 8.5 cm |
+| 2 |  18.5 cm | 31 cm | 8.5 cm |
+| 3 |  18 cm | 34 cm | 9.5 cm |
+
 
 ## 5. Conclusion
 This study introduces an Automatic Parallel Parking Algorithm for Ackermann-steered robotic vehicles.  The algorithm encompasses three primary tasks: localization, path planning, and trajectory tracking.  Empty parking space detection is achieved by leveraging PointCloud data from an RPlidar sensor in conjunction with geometric algorithms. This method demonstrates accuracy in identifying suitable parking spots, providing crucial input for the subsequent path planning stage.
