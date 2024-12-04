@@ -44,7 +44,11 @@ $$
 </p>
 <p align="center"> Figure 4. Sensor Data Fusion for Odometry Using EKF  </p>
 
+The objective is to achieve precise estimation of a mobile robot's complete pose and velocity (6  degrees of freedom) as it navigates its environment. This estimation task can be framed as a nonlinear dynamic system problem:
+
 $$X_k = f(X_{k-1}) + W_{k-1}$$
+
+where  $X_k$ represents the robot's system state (its 3D pose) at time $k$, $f$ is a nonlinear function describing the state transition, and $W_{k-1}$ represents the process noise, assumed to follow a normal distribution. Our state vector $X$, is 3-dimensional, encompassing the vehicle's 3D position, 3D orientation (expressed as Euler angles), and their corresponding velocities. 
 
 $$Z_k = h(X_k) + V_k$$
 
@@ -58,11 +62,21 @@ $$X_k = \widehat{X_k} + K(Z - H\widehat{X_k})$$
 
 $$P_k = (I - KH)P_k(I - KH)^T + KRK^T$$
 
+Kalman Filter is an optimal filter used to estimate the state of a dynamical system based on noisy measurements. In this case, we use Kalman Filter to estimate the position and orientation of the Ackerman robot car.
+
+State: 
+
 $$x_k = [x, y, \theta]^T$$
+
+represents the position (𝑥,𝑦) and orientation θ of the car at time step k.
+
+Control input 
 
 $$u_k = [v, \delta]^T$$
 
+represents the velocity v and steering angle δ of the car.
 
+Measurement output: 
 
 $$h(x_k) = 
 \begin{bmatrix}
@@ -70,6 +84,9 @@ $$h(x_k) =
 v_k
 \end{bmatrix}$$
 
+represents the measured orientation and velocity from sensors.
+
+The state equation describes how the system state evolves over time, based on the control input:
 
 $$x_{k+1} = f(x_k, u_k) =  
 \begin{bmatrix} 
@@ -79,6 +96,8 @@ y_k + v_k sin(\theta_k) \Delta t \\
 \end{bmatrix}
 $$
 
+Jacobian matrix of the state equation with respect to the state:
+
 $$F_k = \frac{\delta f}{\delta x_k} = 
 \begin{bmatrix} 
 1 & 0 & -v_k sin(\theta_k) \Delta t \\ 
@@ -87,6 +106,8 @@ $$F_k = \frac{\delta f}{\delta x_k} =
 \end{bmatrix}
 $$
 
+Jacobian matrix of the state equation with respect to the control input: 
+
 $$P_k = \frac{\delta f}{\delta u_k} = 
 \begin{bmatrix} 
 cos(\theta_k) \Delta t & 0 \\ 
@@ -94,6 +115,8 @@ sin(\theta_k) \Delta t & 0 \\
 \frac{tan(\delta_k) \Delta t}{L} & \frac{v_k \Delta t}{L cos^2(\delta_k)}
 \end{bmatrix}
 $$
+
+Jacobian matrix of the measurement equation with respect to the state:
 
 $$H = \frac{\delta h}{\delta x_k} = 
 \begin{bmatrix} 
@@ -109,15 +132,24 @@ $$H = \frac{\delta h}{\delta x_k} =
 </p>
 <p align="center"> Figure 5. Define coordinates for the B-Spline curve  </p>
 
-$$N_{i,p}(u) = \frac{u - u_i}{u_{i+p} - u_i} N_{i,p-1}(u) + \frac{u_{i+p+1} - u}{u_{i+p+1} - u_{i+1}} N_{i+1,p-1}(u)$$
+The B-Spline curve C(u)  is determined by :
 
 $$C(u) = \sum_{i=0}^{n} N_{i,p}(u)P_i$$
 
+The B-Spline basis function $N_{i,p}(u)$ is determined recursively through the following steps:
+
+
+
+* **Zero-degree**
+  
 $$N_{i,0}(u) = \begin{cases}
 0, & u_i < u < u_{i+1} \\
 1, & \text{Otherwise}
 \end{cases}$$
 
+* **P-th degree**
+  
+$$N_{i,p}(u) = \frac{u - u_i}{u_{i+p} - u_i} N_{i,p-1}(u) + \frac{u_{i+p+1} - u}{u_{i+p+1} - u_{i+1}} N_{i+1,p-1}(u)$$
 
 ### 2.4 Parking path tracking control
 
@@ -131,6 +163,8 @@ $$N_{i,0}(u) = \begin{cases}
 </p>
 <p align="center"> Figure 7. The structure of Pure Pursuit - PI Controller  </p>
 
+Figure 7 illustrates the Ackerman steering principle, which defines the geometric relationship between a vehicle's turning radius and its steering angle. This principle can be mathematically expressed as follows:
+
 $$\frac{sin(2\alpha)}{l_{d}}=\frac{sin(\frac{\pi}{2}-\alpha)}{R}$$
 
 $$\frac{2sin(\alpha)cos(\alpha)}{l_{d}}=\frac{cos(\alpha)}{R}$$
@@ -140,6 +174,8 @@ $$\rho=\frac{2sin(\alpha)}{l_{d}}$$
 $$\delta_{pp} = tan^{-1}(\frac{L}{R}) = tan^{-1}(\rho L)$$
 
 $$\delta_{pp} = tan^{-1}\left(\frac{2Lsin(\alpha)}{l_{d}}\right)$$
+
+A Proportional-Integral (PI) controller is a feedback control mechanism that utilizes both the proportional (P) and integral (I) components of the error to calculate the control signal. In this context, the error that needs to be controlled is the lateral error, which represents the instantaneous deviation of the vehicle from the desired path .
 
 $$\delta_p = K_p e$$
 
