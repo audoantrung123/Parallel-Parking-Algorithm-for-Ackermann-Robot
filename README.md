@@ -146,6 +146,11 @@ $$\delta(t) = \delta_{pp} + \delta_p + \delta_i = tan^{-1}\left( \frac{2Lsin(\al
 
 ## 3. Simulation
 
+![image](https://github.com/user-attachments/assets/85f95f40-0d0f-4d15-830c-cc526bcf5c1e)
+![image](https://github.com/user-attachments/assets/95c201ec-895b-4176-af7a-c00b0f3dd369)
+![image](https://github.com/user-attachments/assets/fcbae741-05f8-4419-9d63-bafbae4a4fc3)
+![image](https://github.com/user-attachments/assets/c832f9d4-e8e2-491c-9f95-d0ca52c1d022)
+
 ## 4. Experrimental Testing Of Parking Algorithm
 
 | Parameter | Value |
@@ -159,15 +164,49 @@ $$\delta(t) = \delta_{pp} + \delta_p + \delta_i = tan^{-1}\left( \frac{2Lsin(\al
 
 **TABLE 4. Actual parking space parameters**
 
-|  | Trajectory size (m) |  | Space size (m) |  |
-|---|---|---|---|---|
-|  |  |x<sub>0</sub> - x<sub>1</sub>|  |y<sub>0</sub> - y<sub>1</sub>| d | Length | Width |
-|---|---|---|---|---|
-| 1 | 0.475 | 1.9 | 0.65 | 0.9 | 0.25 |
-| 2 | 0.425 | 1.7 | 0.6 | 1 | 0.25 |
-| 3 | 0.395 | 1.58 | 0.57 | 1 | 0.25 |
-
-
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th colspan="2">Trajectory size (m)</th>
+      <th colspan="3">Space size (m)</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>|x<sub>0</sub> - x<sub>1</sub>|</th>
+      <th>|y<sub>0</sub> - y<sub>1</sub>|</th>
+      <th>d</th>
+      <th>Length</th>
+      <th>Width</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>0.475</td>
+      <td>1.9</td>
+      <td>0.65</td>
+      <td>0.9</td>
+      <td>0.25</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.425</td>
+      <td>1.7</td>
+      <td>0.6</td>
+      <td>1</td>
+      <td>0.25</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0.395</td>
+      <td>1.58</td>
+      <td>0.57</td>
+      <td>1</td>
+      <td>0.25</td>
+    </tr>
+  </tbody>
+</table>
 
 **TABLE 5.**
 
@@ -176,6 +215,10 @@ $$\delta(t) = \delta_{pp} + \delta_p + \delta_i = tan^{-1}\left( \frac{2Lsin(\al
 | 1 |  19 cm | 32 cm | 8.5 cm |
 | 2 |  18.5 cm | 31 cm | 8.5 cm |
 | 3 |  18 cm | 34 cm | 9.5 cm |
+
+![image](https://github.com/user-attachments/assets/b18b3634-3251-471c-a7ff-51bff424055b)
+![image](https://github.com/user-attachments/assets/120fdbd3-5e2e-4f3f-9899-a20a59a34783)
+![image](https://github.com/user-attachments/assets/f3994010-1528-432d-99d6-3764c0c41f05)
 
 
 ## 5. Conclusion
