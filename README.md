@@ -1,6 +1,6 @@
 # Parallel-Parking-Algorithm-for-Ackermann-Robot
 
-An Off-policy Reinforcement Learning Algorithm for Optimal Tracking Control Problem
+A system for accurate, safe, and convenient automated parking, optimizing parking space utilization.
 
 Full report: [link](https://drive.google.com/drive/folders/1Jxh6SIA5WU8RnSLNCc_X52M6VD_sQgNw?usp=sharing)
 ## 1. Introduction
@@ -10,17 +10,20 @@ Recognizing the increasing prevalence of self parking features in modern vehicle
 <p align="center">
   <img src="https://github.com/user-attachments/assets/64251342-e07e-4fbd-830e-832397932c56" />
 </p>
+<p align="center"> Figure 1. Visualization of the automated parallel parking process</p>
+
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/f85e3cd0-5547-4d8c-a7a8-4e9eccae21a3" />
+  <img src="https://github.com/user-attachments/assets/f85e3cd0-5547-4d8c-a7a8-4e9eccae21a3" width="70%" />
 </p>
-
+<p align="center"> Figure 2. The Automated Parking System using a UML Sequence Diagram  </p>
 
 ### 2.1 Kinematic Model Construction
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/795dda57-bc76-4771-8c7e-e1ee96315c64" />
+  <img src="https://github.com/user-attachments/assets/795dda57-bc76-4771-8c7e-e1ee96315c64" width=" 50%"/>
 </p>
+<p align="center"> Figure 3. Vehicle kinematics model  </p>
 
 $$\begin{bmatrix} 
 \dot{X}_r \\ 
@@ -39,7 +42,7 @@ $$
 <p align="center">
   <img src="https://github.com/user-attachments/assets/d7aa5bd5-655d-41e6-b4fe-4a3c81b18dc2" />
 </p>
-
+<p align="center"> Figure 4. Sensor Data Fusion for Odometry Using EKF  </p>
 
 $$X_k = f(X_{k-1}) + W_{k-1}$$
 
@@ -104,6 +107,7 @@ $$H = \frac{\delta h}{\delta x_k} =
 <p align="center">
   <img src="https://github.com/user-attachments/assets/97d24cea-9883-41af-ac67-35042a065698" />
 </p>
+<p align="center"> Figure 5. Define coordinates for the B-Spline curve  </p>
 
 $$N_{i,p}(u) = \frac{u - u_i}{u_{i+p} - u_i} N_{i,p-1}(u) + \frac{u_{i+p+1} - u}{u_{i+p+1} - u_{i+1}} N_{i+1,p-1}(u)$$
 
@@ -120,10 +124,12 @@ $$N_{i,0}(u) = \begin{cases}
 <p align="center">
   <img src="https://github.com/user-attachments/assets/587b0efd-4116-498c-873d-1f8d18358981" />
 </p>
+<p align="center"> Figure 6. Geometric explanation of Pure Pursuit  </p>
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/5ec4993b-b152-47aa-aa12-df9653088372" />
 </p>
+<p align="center"> Figure 7. The structure of Pure Pursuit - PI Controller  </p>
 
 $$\frac{sin(2\alpha)}{l_{d}}=\frac{sin(\frac{\pi}{2}-\alpha)}{R}$$
 
@@ -146,10 +152,26 @@ $$\delta(t) = \delta_{pp} + \delta_p + \delta_i = tan^{-1}\left( \frac{2Lsin(\al
 
 ## 3. Simulation
 
-![image](https://github.com/user-attachments/assets/85f95f40-0d0f-4d15-830c-cc526bcf5c1e)
-![image](https://github.com/user-attachments/assets/95c201ec-895b-4176-af7a-c00b0f3dd369)
-![image](https://github.com/user-attachments/assets/fcbae741-05f8-4419-9d63-bafbae4a4fc3)
-![image](https://github.com/user-attachments/assets/c832f9d4-e8e2-491c-9f95-d0ca52c1d022)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/85f95f40-0d0f-4d15-830c-cc526bcf5c1e" width="50%" />
+</p>
+<p align="center"> Figure 8. Parallel parking simulation scene</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/95c201ec-895b-4176-af7a-c00b0f3dd369" width="50%" />
+</p>
+<p align="center"> Figure 9. Simulation results in case 1</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/fcbae741-05f8-4419-9d63-bafbae4a4fc3" width="50%" />
+</p>
+<p align="center"> Figure 10. Simulation results in case 2</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/c832f9d4-e8e2-491c-9f95-d0ca52c1d022" width="50%" />
+</p>
+<p align="center"> Figure 11. Simulation results in case 3</p>
+
 
 ## 4. Experrimental Testing Of Parking Algorithm
 
@@ -216,9 +238,33 @@ $$\delta(t) = \delta_{pp} + \delta_p + \delta_i = tan^{-1}\left( \frac{2Lsin(\al
 | 2 |  18.5 cm | 31 cm | 8.5 cm |
 | 3 |  18 cm | 34 cm | 9.5 cm |
 
-![image](https://github.com/user-attachments/assets/b18b3634-3251-471c-a7ff-51bff424055b)
-![image](https://github.com/user-attachments/assets/120fdbd3-5e2e-4f3f-9899-a20a59a34783)
-![image](https://github.com/user-attachments/assets/f3994010-1528-432d-99d6-3764c0c41f05)
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/d5e3e598-8097-4631-a32f-60171ea011a0" width="50%" />
+</p>
+<p align="center"> Figure 12. Block Diagram of the software system structure for a mobile robot</p>
+
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/ae225424-696e-40ab-ba63-4a3fb114d565" width="50%" />
+</p>
+<p align="center"> Figure 13. Hardware architecture of the automated parking system</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/b18b3634-3251-471c-a7ff-51bff424055b" width="70%" />
+</p>
+<p align="center"> Figure 14. Experimental results in case 1</p>
+
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/120fdbd3-5e2e-4f3f-9899-a20a59a34783" width="70%" />
+</p>
+<p align="center"> Figure 15. Experimental results in case 2</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f3994010-1528-432d-99d6-3764c0c41f05" width="70%" />
+</p>
+<p align="center"> Figure 16. Experimental results in case 3</p>
 
 
 ## 5. Conclusion
