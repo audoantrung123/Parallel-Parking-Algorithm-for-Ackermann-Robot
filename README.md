@@ -209,7 +209,7 @@ $$\delta(t) = \delta_{pp} + \delta_p + \delta_i = tan^{-1}\left( \frac{2Lsin(\al
 <p align="center"> Figure 11. Simulation results in case 3</p>
 
 
-## 4. Experrimental Testing Of Parking Algorithm
+## 4. Experimental Testing Of Parking Algorithm
 
 | Parameter | Value |
 |---|---|
