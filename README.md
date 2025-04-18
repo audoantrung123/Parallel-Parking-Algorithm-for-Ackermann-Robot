@@ -4,7 +4,7 @@ A system for accurate, safe, and convenient automated parking, optimizing parkin
 
 Full report: [link](https://drive.google.com/drive/folders/1Jxh6SIA5WU8RnSLNCc_X52M6VD_sQgNw?usp=sharing)
 ## 1. Introduction
-Recognizing the increasing prevalence of self parking features in modern vehicles, aimed at enhancing accuracy, safety, and driver convenience, this study explores autonomous parking control on mobile robots. This study explores autonomous parking control on mobile robots, offering three key contributions. Firstly, it delivers an efficient platform for research and education, enabling researchers and students to readily grasp relevant concepts, algorithms, and techniques without requiring investment in expensive systems. Furthermore, the study prioritizes safety by utilizing mobile robots for algorithm testing, minimizing collision risks and potential damage. Finally, the robot software system, developed using the Robot Operating System (ROS) and a distributed architecture, ensures high flexibility, scalability, and reusability, facilitating seamless integration and sharing across diverse robotic projects. This study specifically proposes an EKF-based localization approach for automatic parallel parking, utilizing IMU and Encoder data for path planning and tracking. Short-range lidar enhances environmental perception, enabling parking space detection based on point cloud data. Algorithm B Splines algorithm optimizes the parking path, adhering to vehicle kinematic constraints while prioritizing smooth, dynamically feasible maneuvers. The chosen Pure Pursuit algorithm combined with Proportional-Integral controller, valued for its simplicity and stability, ensures reliable tracking with minimized errors.
+Developing autonomous parking systems is necessary for optimizing urban space and enhancing the self driving features of modern vehicles. However, the previous solution suffered from some challenges, such as the inability to smooth trajectory when operated on discontinuous curvature profiles and instability due to inadequate look-ahead distance selection. Consequently, this study proposes an autonomous parking algorithm on the mobile robots model aimed at enhancing accuracy, safety, and driver convenience. To this end,  we introduce an Extended Kalman Filter (EKF) -based localization approach for automatic parallel parking utilizing Inertial measurement unit (IMU)  and Encoder data for path planning and tracking. Additionally, the short-range Lidar is used to enhance environmental perception and enable parking space detection based on point cloud data. Subsequently, we propose the B  Splines algorithm to optimize the parking path adhering to vehicle kinematic constraints while prioritizing smooth, dynamically feasible maneuvers. Last but not least, the Pure Pursuit algorithm combined with a Proportional-Integral controller is presented to ensure reliable tracking with minimized errors.  Building upon a parking space detection accuracy of 98% under laboratory conditions, the proposed controller achieves a peak error of only 1.8 cm with a range of 2.6 cm.  The comprehensive experimental results prove that the proposed algorithm can obtain promising performance against previous methods.
 ## 2. Methodology
 
 <p align="center">
@@ -14,9 +14,9 @@ Recognizing the increasing prevalence of self parking features in modern vehicle
 
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/f85e3cd0-5547-4d8c-a7a8-4e9eccae21a3" width="70%" />
+  <img src="https://github.com/user-attachments/assets/f74f8697-9468-4e63-9ec9-145e9fc710d9" width="70%" />
 </p>
-<p align="center"> Figure 2. The Automated Parking System using a UML Sequence Diagram  </p>
+<p align="center"> Figure 2. Automated Parking System Architecture  </p>
 
 ### 2.1 Kinematic Model Construction
 
@@ -189,9 +189,9 @@ $$\delta(t) = \delta_{pp} + \delta_p + \delta_i = tan^{-1}\left( \frac{2Lsin(\al
 ## 3. Simulation
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/85f95f40-0d0f-4d15-830c-cc526bcf5c1e" width="50%" />
+  <img src="https://github.com/user-attachments/assets/d0e39026-4642-4a30-92ef-e8251bd564d3" width="50%" />
 </p>
-<p align="center"> Figure 8. Parallel parking simulation scene</p>
+<p align="center"> Figure 8. Parking Maneuver with Trajectory Visualization on CARLA</p>
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/95c201ec-895b-4176-af7a-c00b0f3dd369" width="50%" />
@@ -210,7 +210,9 @@ $$\delta(t) = \delta_{pp} + \delta_p + \delta_i = tan^{-1}\left( \frac{2Lsin(\al
 
 
 ## 4. Experimental Testing Of Parking Algorithm
-
+<div align="center">
+  
+**TABLE 1. Vehicle parameters**
 | Parameter | Value |
 |---|---|
 | Wheelbase/m | 0.25 |
@@ -220,60 +222,55 @@ $$\delta(t) = \delta_{pp} + \delta_p + \delta_i = tan^{-1}\left( \frac{2Lsin(\al
 |  δ<sub>max</sub> /rad | 7π/36 | 
 | v<sub>max</sub>/ms<sup>-1</sup> | 0.14 |
 
-**TABLE 4. Actual parking space parameters**
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th> </th>
-      <th colspan="2">Trajectory size (m)</th>
-      <th colspan="3">Space size (m)</th>
-    </tr>
-    <tr>
-      <th></th>
-      <th>|x<sub>0</sub> - x<sub>1</sub>|</th>
-      <th>|y<sub>0</sub> - y<sub>1</sub>|</th>
-      <th>d</th>
-      <th>Length</th>
-      <th>Width</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>0.475</td>
-      <td>1.9</td>
-      <td>0.65</td>
-      <td>0.9</td>
-      <td>0.25</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>0.425</td>
-      <td>1.7</td>
-      <td>0.6</td>
-      <td>1</td>
-      <td>0.25</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>0.395</td>
-      <td>1.58</td>
-      <td>0.57</td>
-      <td>1</td>
-      <td>0.25</td>
-    </tr>
-  </tbody>
-</table>
+<div align="center">
 
-**TABLE 5.**
+**TABLE 2. Parameters of simulation parking space**
+
+|   | &#124;x<sub>0</sub> - x<sub>1</sub>&#124; (m) | &#124;y<sub>0</sub> - y<sub>1</sub>&#124; (m) | Length (m) | Width (m) |
+|:-:|:------------------------------------------:|:------------------------------------------:|:----------:|:---------:|
+| 1 | 0.25                                       | 1                                          | 0.9        | 0.25      |
+| 2 | 0.3                                        | 1.2                                        | 1          | 0.25      |
+| 3 | 0.35                                       | 1.4                                        | 1          | 0.25      |
+
+</div>
+
+<div align="center">
+  
+**TABLE 3. Actual parking space parameters**
+
+|   | &#124;x<sub>0</sub> - x<sub>1</sub>&#124; (m) | &#124;y<sub>0</sub> - y<sub>1</sub>&#124; (m) | d (m) | Length (m) | Width (m) |
+|:-:|:------------------------------------------:|:------------------------------------------:|:-----:|:----------:|:---------:|
+| 1 | 0.475                                      | 1.9                                        | 0.65  | 0.9        | 0.25      |
+| 2 | 0.425                                      | 1.7                                        | 0.6   | 1          | 0.25      |
+| 3 | 0.395                                      | 1.58                                       | 0.57  | 1          | 0.25      |
+</div>
+
+<div align="center">
+  
+**TABLE 4. Location of the vehicle after parking**
 
 | Case  | Front | Behind | Right Side |
 |---|---|---|---|
 | 1 |  19 cm | 32 cm | 8.5 cm |
 | 2 |  18.5 cm | 31 cm | 8.5 cm |
 | 3 |  18 cm | 34 cm | 9.5 cm |
+</div>
 
+<div align="center">
+
+**TABLE 5. Ablation Study Results**
+
+| Methods                          | Max steering angle<br>step (rad) | Maximum lateral<br>error (cm) |
+|:---------------------------------|:-------------------------------:|:----------------------------:|
+| Without B-Spline with Fuzzy      | 0.863                           | 4.2                          |
+| Without B-Spline with PP-PI      | 0.714                           | 2.1                          |
+| B-Spline with Fuzzy              | 0.678                           | 4.1                          |
+| B-Spline with Pure Pursuit       | 0.584                           | 3.4                          |
+| B-Spline with PP-PI              | 0.023                           | 1.8                          |
+
+</div>
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/d5e3e598-8097-4631-a32f-60171ea011a0" width="50%" />
@@ -286,25 +283,61 @@ $$\delta(t) = \delta_{pp} + \delta_p + \delta_i = tan^{-1}\left( \frac{2Lsin(\al
 </p>
 <p align="center"> Figure 13. Hardware architecture of the automated parking system</p>
 
+
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/b9dfd14e-9039-4783-98e4-c36afe3aa2b0" width="50%" />
+</p>
+<p align="center"> Figure 14. Parking steps in a designed parking lot</p>
+
 <p align="center">
   <img src="https://github.com/user-attachments/assets/b18b3634-3251-471c-a7ff-51bff424055b" width="70%" />
 </p>
-<p align="center"> Figure 14. Experimental results in case 1</p>
+<p align="center"> Figure 15. Experimental results in case 1</p>
 
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/120fdbd3-5e2e-4f3f-9899-a20a59a34783" width="70%" />
 </p>
-<p align="center"> Figure 15. Experimental results in case 2</p>
+<p align="center"> Figure 16. Experimental results in case 2</p>
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/f3994010-1528-432d-99d6-3764c0c41f05" width="70%" />
 </p>
-<p align="center"> Figure 16. Experimental results in case 3</p>
+<p align="center"> Figure 17. Experimental results in case 3</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/387b43cf-c113-495d-a50d-1cf483d801c7" width="70%" />
+</p>
+<p align="center"> Figure 18. Fuzzy Membership Functions for CTE, Heading Error, and Steering
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/b889fa84-161e-4857-9705-168462fa89b9" width="70%" />
+</p>
+<p align="center"> Figure 19. Comparison the tracking results and steering angle between the three controllers Fuzzy, 
+Pure-Pursuit and PI-PP
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/150cd4d5-17c6-48fa-b904-1551069eb9d0" width="70%" />
+</p>
+<p align="center"> Figure 20. Comparison the tracking results and steering angle between the three controllers Fuzzy, 
+Pure-Pursuit and PI-PP
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/d5b24b2f-fdfa-489f-bed0-ef99d9ff3f00" width="70%" />
+</p>
+<p align="center"> Figure 21. Comparison the tracking results and steering angle between the three controllers Fuzzy, 
+Pure-Pursuit and PI-PP
+</p>
+
+
+
+
 
 
 ## 5. Conclusion
-This study introduces an Automatic Parallel Parking Algorithm for Ackermann-steered robotic vehicles.  The algorithm encompasses three primary tasks: localization, path planning, and trajectory tracking.  Empty parking space detection is achieved by leveraging PointCloud data from an RPlidar sensor in conjunction with geometric algorithms. This method demonstrates accuracy in identifying suitable parking spots, providing crucial input for the subsequent path planning stage.
-Departing from traditional Tangent Circle approaches, this research employs a B-Spline trajectory for smoother, more continuous steering commands. This eliminates abrupt transitions between maximum and minimum steering angles, enhancing real-world feasibility.  The chosen control strategy combines a Pure Pursuit controller with a Proportional Integral (PI) component. This combination proves effective in guiding the vehicle along the planned trajectory while mitigating over-reliance on Look-Ahead Distance parameters.
-Future development will prioritize enhancing detection and localization capabilities by integrating a camera for lane detection, parking sign recognition, and vehicle identification. This visual data, combined with existing sensor information, will improve the accuracy and reliability of the system. Furthermore, the path planning algorithm will be optimized to adapt to dynamic environments, effectively avoiding moving obstacles and reducing computation time. Control performance will be enhanced by implementing adaptive control techniques and reinforcement learning, enabling smoother and more precise vehicle movements. Finally, real world testing in diverse parking environments will be conducted to evaluate the system's effectiveness and explore cost-reduction solutions for potential commercialization.
+This study introduces an Automatic Parallel Parking Algorithm for Ackermann-steered robotic vehicles.  The algorithm encompasses three primary tasks: localization, path planning, and trajectory tracking.  Empty parking space detection is achieved by leveraging PointCloud data from an RPlidar sensor in conjunction with geometric algorithms. This method  accurately identifiessuitable parking spots, providing crucial input for the subsequent path planning stage. Unlike traditional Tangent Circle approaches, this research employs a B-Spline trajectory for smoother, more continuous steering commands. This eliminates abrupt transitions between maximum and minimum steering angles, enhancing real-world feasibility.Additionally, the chosen control strategy combines a Pure Pursuit controller with a Proportional Integral (PI) component. In this way, it effectively guides the vehicle along the planned trajectory while mitigating over-reliance on Look-Ahead Distance parameters. However, key limitations include validation conducted solely within controlled laboratory environments, neglecting performance evaluation under adverse weather or complex real-world conditions. Furthermore, the algorithm currently specializes only in parallel parking, indicating potential for expansion to other configurations and necessitating broader environmental robustness testing. Future efforts will concentrate on enhancing perception and localization via camera integration and sensor fusion. Subsequently, path planning and control will be optimized for dynamic environments using adaptive techniques and reinforcement learning, followed by extensive real-world testing for validation and assessing commercialization feasibility.
 
