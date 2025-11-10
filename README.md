@@ -3,6 +3,9 @@
 A system for accurate, safe, and convenient automated parking, optimizing parking space utilization.
 
 Full report: [link](https://drive.google.com/drive/folders/1Jxh6SIA5WU8RnSLNCc_X52M6VD_sQgNw?usp=sharing)
+
+Video: https://www.youtube.com/watch?v=MfAa9uoNawA
+
 ## 1. Introduction
 Developing autonomous parking systems is necessary for optimizing urban space and enhancing the self driving features of modern vehicles. However, the previous solution suffered from some challenges, such as the inability to smooth trajectory when operated on discontinuous curvature profiles and instability due to inadequate look-ahead distance selection. Consequently, this study proposes an autonomous parking algorithm on the mobile robots model aimed at enhancing accuracy, safety, and driver convenience. To this end,  we introduce an Extended Kalman Filter (EKF) -based localization approach for automatic parallel parking utilizing Inertial measurement unit (IMU)  and Encoder data for path planning and tracking. Additionally, the short-range Lidar is used to enhance environmental perception and enable parking space detection based on point cloud data. Subsequently, we propose the B  Splines algorithm to optimize the parking path adhering to vehicle kinematic constraints while prioritizing smooth, dynamically feasible maneuvers. Last but not least, the Pure Pursuit algorithm combined with a Proportional-Integral controller is presented to ensure reliable tracking with minimized errors.  Building upon a parking space detection accuracy of 98% under laboratory conditions, the proposed controller achieves a peak error of only 1.8 cm with a range of 2.6 cm.  The comprehensive experimental results prove that the proposed algorithm can obtain promising performance against previous methods.
 ## 2. Methodology
